@@ -1,19 +1,23 @@
 <template>
     <div>
-        <img alt="Vue logo" src="./assets/logo.png">
-        <Home />
+        <v-row justify="center">
+            <img alt="Vue logo" src="./assets/logo.png">
+        </v-row>
+        <v-row justify="center">
+            <Home />
+        </v-row>
     </div>
 </template>
 
 <script>
-import Home from './components/Home.vue'
+    import Home from './components/Home.vue'
 
-export default {
-  name: 'App',
-  components: {
-    Home
-  }
-}
+    export default {
+        name: 'App',
+        components: {
+            Home
+        }
+    }
 </script>
 
 <style lang="scss">

@@ -3,9 +3,8 @@
     "",
     "\\Scripts",
     "\\src",
-    "\\src\\assets",
     "\\src\\components"
   ],
-  "SelectedNode": "\\Scripts\\gh-pages-deploy.js",
+  "SelectedNode": "\\src\\App.vue",
   "PreviewInSolutionExplorer": false
 }

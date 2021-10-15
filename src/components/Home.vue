@@ -1,9 +1,23 @@
 <template>
   <div class="hello">
     <h1>{{ message }}</h1>
-    <p>
-      {{ giorno }}
-    </p>
+    <v-row justify="center" align="center" class="mt-4">
+        <v-spacer></v-spacer>
+        <v-col align="right">
+            <v-btn depressed color="primary" @click="dietroData" :disabled="!boolMinore">
+                {{ minore }}
+            </v-btn>
+        </v-col>
+        <v-col align="center">
+            {{ giorno }}
+        </v-col>
+        <v-col align="left">
+            <v-btn depressed color="primary" @click="avanzaData" :disabled="!boolMaggiore">
+                {{ maggiore }}
+            </v-btn>
+        </v-col>
+        <v-spacer></v-spacer>
+    </v-row>
     <!-- <h3>Installed CLI Plugins</h3>
     <ul>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
@@ -34,11 +48,30 @@
         data() {
             return {
                 message: "Prenota il campo",
+                minore: "<",
+                maggiore: ">",
+                contatore: 0
             }
         },
         computed: {
             giorno: function () {
-                return new Date().toLocaleString('it-IT', { year: 'numeric', month: 'numeric', day: 'numeric' })
+                const date = new Date()
+                date.setDate(date.getDate() + this.contatore)
+                return date.toLocaleString("it-IT", { year: "numeric", month: "numeric", day: "numeric" })
+            },
+            boolMaggiore: function () {
+                return this.contatore < 10
+            },
+            boolMinore: function () {
+                return this.contatore > 0
+            }
+        },
+        methods: {
+            avanzaData: function () {
+                this.boolMaggiore && this.contatore++
+            },
+            dietroData: function () {
+                this.boolMinore && this.contatore--
             }
         }
     }

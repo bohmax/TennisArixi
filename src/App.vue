@@ -1,11 +1,9 @@
 <template>
-    <div>
-        <v-row justify="center">
-            <img alt="Vue logo" src="./assets/logo.png">
-        </v-row>
-        <v-row justify="center">
+    <div id="app">
+        <img alt="Vue logo" src="./assets/logo.png">
+        <v-app>
             <Home />
-        </v-row>
+        </v-app>
     </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class='hello'>
     <h1>{{ message }}</h1>
     <v-row justify="center" align="center" class="mt-4">
         <v-spacer></v-spacer>

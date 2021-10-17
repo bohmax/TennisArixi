@@ -1,7 +1,9 @@
 <template>
     <div id='app'>
-        <img alt='Vue logo' src="./assets/logo.png">
         <v-app>
+            <v-row justify="center" align="center" class="shrink my-4">
+                <v-img alt='Vue logo' contain src="./assets/logo.png" width="128" height="128" aspect-ratio="1"/>
+            </v-row>
             <Home />
         </v-app>
     </div>
@@ -38,5 +40,8 @@
                 color: #42b983;
             }
         }
+    }
+    margintop {
+        margin-top: 10px;
     }
 </style>

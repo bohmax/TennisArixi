@@ -1,9 +1,10 @@
 <template>
 <div class="pa-4">
     <v-chip-group
-    active-class="primary--text"
-    column
-    multiple
+        v-model="selezionati"
+        active-class="primary--text"
+        column
+        multiple
     >
     <v-chip
         v-for="tag in orari"
@@ -21,6 +22,7 @@ export default {
     name: 'selezionaGiorno',
     data() {
         return {
+            selezionati: [],
             orari: [
                 '9:00',
                 '10:00',
@@ -36,6 +38,11 @@ export default {
                 '20:00',
                 '21:00',
             ]
+        }
+    },
+    watch: {
+        selezionati: function () {
+            this.$emit('orarioSelezionato', this.selezionati)
         }
     },
     mounted() {

@@ -22,7 +22,7 @@
             </v-col>
         </v-row>
       </v-container>
-    <seleziona-ora/>
+    <seleziona-ora @orarioSelezionato="orarioSelezionato"/>
   </div>
 </template>
 
@@ -60,6 +60,9 @@ export default {
             this.giorni[this.selezionato].colore = undefined
             this.selezionato = index
             this.giorni[this.selezionato].colore = "blue lighten-2"
+        },
+        orarioSelezionato: function (items) {
+            this.$emit('selezionato', { giorno: this.giorni[this.selezionato], orari: items })
         }
     }
 }

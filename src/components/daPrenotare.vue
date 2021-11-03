@@ -1,17 +1,20 @@
 <template>
-    <div>
-      <v-card
-        class="mb-2"
-      >
-        <v-card-title>{{ campo }}</v-card-title>
-      </v-card>
-    </div>
+  <v-card
+    class="mb-2"
+    width="100%"
+    :color="proprieta.colorCard"
+    dark
+  >
+    <v-card-title>{{ proprieta.text }}</v-card-title>
+    <v-card-text>{{ campo }} </v-card-text>
+  </v-card>
 </template>
 
 <script>
 export default {
     name: 'daPrenotare',
     props: {
+      proprieta: Object,
       campo: Object
     },
     data() {

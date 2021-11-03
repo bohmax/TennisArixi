@@ -22,7 +22,7 @@
             </v-col>
         </v-row>
       </v-container>
-    <seleziona-ora @orarioSelezionato="orarioSelezionato" :selezionato="selezionato" :maxGiorno="maxGiorni" />
+    <seleziona-ora v-show="giornoSelezionato" @orarioSelezionato="orarioSelezionato" :selezionato="selezionato" :maxGiorno="maxGiorni" />
   </div>
 </template>
 
@@ -37,7 +37,8 @@ export default {
             maxGiorni: 10,
             mese: ["GEN", "FEB", "MAR", "APR", "MAG", "GIU", "LUG", "AGO", "SET", "OTT", "NOV", "DIC"],
             weekday: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
-            selezionato: 0
+            selezionato: 0,
+            giornoSelezionato: false
         }
     },
     components: {
@@ -60,6 +61,7 @@ export default {
             this.giorni[this.selezionato].colore = undefined
             this.selezionato = index
             this.giorni[this.selezionato].colore = "blue lighten-2"
+            this.giornoSelezionato = true
         },
         orarioSelezionato: function (items) {
             this.$emit('selezionato', { giorno: this.giorni[this.selezionato], orari: items })

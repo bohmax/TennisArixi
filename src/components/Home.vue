@@ -23,10 +23,10 @@
       <v-col align="center">
         <v-row
           justify="center"
-          v-for="(value, proprieta) in prenotazioni" :key="proprieta"
+          v-for="(value, proprieta, index) in prenotazioni" :key="proprieta"
           v-show="riepilogoCampi[proprieta]"
         >
-          <prenotazione :campo="value"/>
+          <prenotazione :proprieta="campi[index]" :campo="value"/>
         </v-row>
       </v-col>
       <v-col align-self="center">
@@ -53,7 +53,7 @@ export default {
     data() {
       return {
           message: "Prenota il campo",
-          campi: [ { text: "Vecchio", colore: "primary", show: true }, { text: "Nuovo", colore: "primary", show: true }],
+          campi: [ { text: "Vecchio", colore: "primary", show: true, colorCard: "green" }, { text: "Nuovo", colore: "primary", show: true, colorCard: "#1F7087" }],
           campoSelezionato: null,
           riepilogoCampi: {},
           mostraBtnPrenotazione: false

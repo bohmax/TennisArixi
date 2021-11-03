@@ -22,7 +22,7 @@
             </v-col>
         </v-row>
       </v-container>
-    <seleziona-ora @orarioSelezionato="orarioSelezionato"/>
+    <seleziona-ora @orarioSelezionato="orarioSelezionato" :selezionato="selezionato" :maxGiorno="maxGiorni" />
   </div>
 </template>
 

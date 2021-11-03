@@ -1,7 +1,7 @@
 <template>
 <div class="pa-4">
     <v-chip-group
-        v-model="selezionati"
+        v-model="selezionati[selezionato]"
         active-class="primary--text"
         column
         multiple
@@ -20,6 +20,10 @@
 
 export default {
     name: 'selezionaGiorno',
+    props: {
+        selezionato: Number,
+        maxGiorni: Number
+    },
     data() {
         return {
             selezionati: [],
@@ -42,7 +46,7 @@ export default {
     },
     watch: {
         selezionati: function () {
-            this.$emit('orarioSelezionato', this.selezionati)
+            this.$emit('orarioSelezionato', this.selezionati[this.selezionato])
         }
     },
     mounted() {
@@ -56,12 +60,8 @@ export default {
                 date.setDate(date.getDate() + 1)
                 const obj = { mese: date.getMonth(), sett: date.getDay(), giorno: date.getDate(), colore: "white" }
                 this.giorni.push(obj)
+                this.selezionati.push([])
             }
-        },
-        seleziona: function (index) {
-            this.giorni[this.selezionato].colore = undefined
-            this.selezionato = index
-            this.giorni[this.selezionato].colore = "blue lighten-2"
         }
     }
 }

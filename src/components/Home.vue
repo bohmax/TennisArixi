@@ -19,18 +19,26 @@
         <v-spacer></v-spacer>
     </v-row>
     <v-row justify="center" class="mt-8">
+      <v-spacer></v-spacer>
       <v-col align="center">
-        <prenotazioni />
+        <v-row
+          justify="center"
+          v-for="(value, proprieta) in prenotazioni" :key="proprieta"
+          v-show="riepilogoCampi[proprieta]"
+        >
+          <prenotazione :campo="value"/>
+        </v-row>
       </v-col>
-      <v-col align="center">
+      <v-col align-self="center">
         <v-btn
           color="success"
-          :disabled="prenota"
+          v-show="mostraBtnPrenotazione"
           @click="prenotaClick"
         >
           Prenota
         </v-btn>
       </v-col>
+      <v-spacer></v-spacer>
     </v-row>
   </div>
 </template>
@@ -47,16 +55,37 @@ export default {
           message: "Prenota il campo",
           campi: [ { text: "Vecchio", colore: "primary", show: true }, { text: "Nuovo", colore: "primary", show: true }],
           campoSelezionato: null,
+          riepilogoCampi: {},
+          mostraBtnPrenotazione: false
       }
     },
     components: {
       'seleziona-giorno': selezionaGiorno,
-      'prenotazioni': daPrenotare
+      'prenotazione': daPrenotare
+    },
+    watch: {
+      prenotazioni: {
+        deep: true,
+        handler: function () {
+          this.mostraBtnPrenotazione = false
+          for (const campo in this.prenotazioni) {
+            this.riepilogoCampi[campo] = false
+            for (const val in this.prenotazioni[campo]) {
+              const arr = this.prenotazioni[campo][val]
+              if (arr && arr.length > 0) {
+                this.riepilogoCampi[campo] = true
+                break
+              }
+            }
+            this.mostraBtnPrenotazione = this.mostraBtnPrenotazione || this.riepilogoCampi[campo]
+          }
+        }
+      }
     },
     computed: {
-      prenota: function () {
-        return !this.campoSelezionato
-      }
+      prenotazioni: function () {
+        return state.getters.prenotazioni
+      },
     },
     methods: {
       selCampo: function (index) {
@@ -69,16 +98,14 @@ export default {
       datiGiornoSelezionato0: function (items) {
         items.campo = 1
         state.commit('addPrenotazione', items)
-        console.log('dd')
       },
       datiGiornoSelezionato1: function (items) {
         items.campo = 2
         state.commit('addPrenotazione', items)
-        console.log('ff')
       },
       prenotaClick: function () {
         console.log('Prenotato')
-      }
+      },
     }
 }
 </script>

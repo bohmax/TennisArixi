@@ -1,23 +1,24 @@
 <template>
     <div>
-        {{ prenotazioni }}
+      <v-card
+        class="mb-2"
+      >
+        <v-card-title>{{ campo }}</v-card-title>
+      </v-card>
     </div>
 </template>
 
 <script>
-import state from '@/store/index'
-
 export default {
     name: 'daPrenotare',
+    props: {
+      campo: Object
+    },
     data() {
         return {
         }
     },
     computed: {
-        prenotazioni: function () {
-            console.log(state.getters.prenotazioni)
-            return state.getters.prenotazioni
-        }
     },
     methods: {
     }

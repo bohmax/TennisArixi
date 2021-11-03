@@ -12,8 +12,8 @@ export default new Vuex.Store({
       const selCampo = state.prenotazioni[obj.campo]
       if (selCampo) {
         const giorno = obj.giorno.giorno
-        if (selCampo[obj.giorno.giorno]) {
-          Vue.set(selCampo, { giorno: obj.orari })
+        if (!selCampo[giorno]) {
+          Vue.set(selCampo, giorno, obj.orari)
         }
         selCampo[giorno] = obj.orari
       }

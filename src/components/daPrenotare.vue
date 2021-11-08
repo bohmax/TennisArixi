@@ -5,12 +5,18 @@
     :color="proprieta.colorCard"
     dark
   >
-    <v-card-title>{{ proprieta.text }}</v-card-title>
-    <v-card-text>{{ campo }} </v-card-text>
+    <v-card-title>{{ proprieta.text }} {{ "campo" }}</v-card-title>
+    <v-card-text>
+      <v-row class="px-2" v-for="(ora, index) in testo" :key="index"> 
+        {{ ora }}
+      </v-row>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
+import state from '@/store/index'
+
 export default {
     name: 'daPrenotare',
     props: {
@@ -19,9 +25,27 @@ export default {
     },
     data() {
         return {
+          mese: state.getters.mese,
+          weekday: state.getters.weekday,
+          orari: state.getters.orari
         }
     },
     computed: {
+      testo: function () {
+        let ris = []
+
+        for (const giorno in this.campo) {
+          const datiGiorno = state.getters.datiGiorni(giorno)
+          const sett = this.weekday[datiGiorno.sett]
+          const mese = this.mese[datiGiorno.mese]
+          const riga = sett + ' ' + giorno + ' ' + mese.toLowerCase()
+          for (const el of this.campo[giorno]) {
+            console.log(el)
+            ris.push(riga + ' dalle ' + this.orari[el] + ' alle ' + this.orari[el + 1])
+          }
+        }
+        return ris
+      }
     },
     methods: {
     }

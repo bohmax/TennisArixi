@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import store from '@/store/index'
 import selezionaOra from '@/components/selezionaOra'
 
 export default {
@@ -35,8 +36,8 @@ export default {
         return {
             giorni: [],
             maxGiorni: 10,
-            mese: ["GEN", "FEB", "MAR", "APR", "MAG", "GIU", "LUG", "AGO", "SET", "OTT", "NOV", "DIC"],
-            weekday: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+            mese: store.getters.mese,
+            weekday: store.getters.weekday,
             selezionato: 0,
             giornoSelezionato: false
         }

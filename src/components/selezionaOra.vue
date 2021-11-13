@@ -1,19 +1,18 @@
 <template>
-<div class="pa-4">
-    <v-chip-group
-        v-model="selezionati[selezionato]"
-        active-class="primary--text"
-        column
-        multiple
-    >
-    <v-chip
-        v-for="tag in orari"
-        :key="tag"
-    >
-        {{ tag }}
-    </v-chip>
-    </v-chip-group>
-    </div>
+    <v-row justify="center" class="pa-4">
+        <v-chip-group
+            v-model="selezionati[selezionato]"
+            active-class="primary--text"
+            multiple
+        >
+        <v-chip
+            v-for="tag in orari"
+            :key="tag"
+        >
+            {{ tag }}
+        </v-chip>
+        </v-chip-group>
+    </v-row>
 </template>
 
 <script>
@@ -28,7 +27,7 @@ export default {
     data() {
         return {
             selezionati: [],
-            orari: state.getters.orari
+            orari: state.getters.orari.slice(0, -1)
         }
     },
     watch: {

@@ -1,12 +1,12 @@
 <template>
   <v-card
     class="mb-2"
-    width="100%"
+    max-width="400"
     :color="proprieta.colorCard"
     dark
   >
     <v-card-title>{{ proprieta.text }} {{ "campo" }}</v-card-title>
-    <v-card-text>
+    <v-card-text class="pb-0">
       <v-row class="px-2" v-for="(ora, index) in testo" :key="index"> 
         {{ ora }}
       </v-row>

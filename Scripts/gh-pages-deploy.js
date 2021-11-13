@@ -23,3 +23,8 @@ const fs = require('fs');
         process.exit(1);
     }
 })();
+
+/* rd -r .\dist\
+git checkout -f main
+git branch -D gh-pages
+*/

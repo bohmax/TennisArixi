@@ -9,10 +9,13 @@
     "deploy": "node scripts/gh-pages-deploy.js"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "core-js": "^3.19.1",
+    "firebase": "^9.4.1",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
-    "vuetify": "^2.4.0",
+    "vue-router": "^3.5.3",
+    "vuetify": "^2.5.14",
     "vuex": "^3.4.0"
   },
   "devDependencies": {

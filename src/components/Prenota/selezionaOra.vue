@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="center" class="pa-4">
+    <v-row justify="center" class="py-4">
         <v-chip-group
             v-model="selezionati[selezionato]"
             active-class="primary--text"

@@ -1,15 +1,25 @@
 <template>
-  <hello-world />
+    <v-container>
+        <transition>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </transition>
+    </v-container>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
-
-  export default {
-    name: 'Home',
-
-    components: {
-      HelloWorld,
+export default {
+    name: 'daPrenotare',
+    props: {
     },
-  }
+    data() {
+        return {
+        }
+    },
+    computed: {
+    },
+    methods: {
+    }
+}
 </script>

@@ -1,6 +1,9 @@
 <template>
     <div id='app'>
         <v-app>
+            <v-row justify="center" class="mt-4">
+                <log-status />
+            </v-row>
             <v-row justify="center" align="center" class="shrink my-4">
                 <v-img alt='Vue logo' contain src="./assets/logo.png" width="128" height="128" aspect-ratio="1"/>
             </v-row>
@@ -10,14 +13,16 @@
 </template>
 
 <script>
-    import Home from './components/Home.vue'
+import LogStatus from './components/logStatus.vue'
+import Home from './views/Home'
 
-    export default {
-        name: 'App',
-        components: {
-            Home
-        }
+export default {
+    name: 'App',
+    components: {
+        Home,
+        'log-status': LogStatus
     }
+}
 </script>
 
 <style lang="scss">

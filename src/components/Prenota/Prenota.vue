@@ -1,35 +1,30 @@
 <template>
   <div class='hello'>
-    <h1>{{ message }}</h1>
+    <v-row justify="center">
+      <h1>{{ message }}</h1>
+    </v-row>
     <v-row justify="center" align="center" class="mt-2 shrink">
-      <v-spacer></v-spacer>
-      <div v-for="(campo, index) in campi" :key="index">
-        <v-col :align-self="campo.align">
+        <v-col v-for="(campo, index) in campi" :key="index" :align="campo.align">
           <v-btn @click="selCampo(index)" :color="campo.colore" depressed :outlined="campo.show" rounded>
             {{campo.text}}
           </v-btn>
         </v-col>
-      </div>
-      <v-spacer></v-spacer>
     </v-row>
     <v-row justify="center" align="center" class="mt-6">
-        <v-spacer></v-spacer>
         <seleziona-giorno v-show="campoSelezionato===0" @selezionato="datiGiornoSelezionato0"/>
         <seleziona-giorno v-show="campoSelezionato===1" @selezionato="datiGiornoSelezionato1"/>
-        <v-spacer></v-spacer>
     </v-row>
     <v-row justify="center" class="mt-8">
-      <v-spacer></v-spacer>
       <v-col align="center">
         <v-row
-          justify="center"
+          justify="end"
           v-for="(value, proprieta, index) in prenotazioni" :key="proprieta"
           v-show="riepilogoCampi[proprieta]"
         >
           <prenotazione :proprieta="campi[index]" :campo="value"/>
         </v-row>
       </v-col>
-      <v-col align-self="center">
+      <v-col align="start" align-self="center">
         <v-btn
           color="success"
           v-show="mostraBtnPrenotazione"
@@ -38,14 +33,13 @@
           Prenota
         </v-btn>
       </v-col>
-      <v-spacer></v-spacer>
     </v-row>
   </div>
 </template>
 
 <script>
-import selezionaGiorno from '@/components/selezionaGiorno'
-import daPrenotare from '@/components/daPrenotare'
+import selezionaGiorno from '@/components/Prenota/selezionaGiorno'
+import daPrenotare from '@/components/Prenota/daPrenotare'
 import state from '@/store/index'
 
 export default {
@@ -53,7 +47,7 @@ export default {
     data() {
       return {
           message: "Prenota il campo",
-          campi: [ { text: "Vecchio", colore: "primary", show: true, colorCard: "green" }, { text: "Nuovo", colore: "primary", show: true, colorCard: "#1F7087" }],
+          campi: [ { text: "Vecchio", colore: "primary", show: true, colorCard: "green", align: 'end' }, { text: "Nuovo", colore: "primary", show: true, colorCard: "#1F7087", align: 'start' }],
           campoSelezionato: null,
           riepilogoCampi: {},
           mostraBtnPrenotazione: false

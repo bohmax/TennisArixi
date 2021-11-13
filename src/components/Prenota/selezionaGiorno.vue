@@ -1,34 +1,32 @@
 <template>
   <div>
-      <v-container class="mx-2 overflow-y-auto">
-        <v-row justify="center" align="center" class="mx-2">
-            <v-col align="center" max-width="64" v-for="(el, index) in giorni"
-            :key="index">
-                <v-card @click="seleziona(index)" :color="el.colore" class="px-1" max-width="64" min-width="64">
-                    <v-card-text>
-                        <v-row justify="center">
-                            {{ weekday[el.sett] }}
-                        </v-row>
-                        <v-row justify="center">
-                            <strong>
-                                {{ el.giorno }}
-                            </strong>
-                        </v-row>
-                        <v-row justify="center">
-                            {{ mese[el.mese] }}
-                        </v-row>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-        </v-row>
-      </v-container>
+    <v-row justify="center" align="center" class="mx-2">
+        <v-col align="center" max-width="64" v-for="(el, index) in giorni"
+        :key="index">
+            <v-card @click="seleziona(index)" :color="el.colore" class="px-1" max-width="64" min-width="64">
+                <v-card-text>
+                    <v-row justify="center">
+                        {{ weekday[el.sett] }}
+                    </v-row>
+                    <v-row justify="center">
+                        <strong>
+                            {{ el.giorno }}
+                        </strong>
+                    </v-row>
+                    <v-row justify="center">
+                        {{ mese[el.mese] }}
+                    </v-row>
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
     <seleziona-ora v-show="giornoSelezionato" @orarioSelezionato="orarioSelezionato" :selezionato="selezionato" :maxGiorno="maxGiorni" />
   </div>
 </template>
 
 <script>
 import store from '@/store/index'
-import selezionaOra from '@/components/selezionaOra'
+import selezionaOra from '@/components/Prenota/selezionaOra'
 
 export default {
     name: 'selezionaGiorno',

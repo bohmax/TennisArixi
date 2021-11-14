@@ -38,11 +38,14 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = firebase.auth().currentUser;
   console.log("isauthenticated", isAuthenticated);
   if (requiresAuth && !isAuthenticated) {
+    console.log('prova')
     next("/login");
   } else if (to.name !== 'Login' ){
     next();
   } else if (isAuthenticated) { // se l'utente e' autenticato non andare su login
     next(from)
+  } else {
+    next()
   }
 });
 

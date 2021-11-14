@@ -1,5 +1,5 @@
 <template>
-  <div class='hello'>
+  <div class='hello' v-if="state.getters.user && state.getters.user.emailVerified">
     <v-row justify="center">
       <h1>{{ message }}</h1>
     </v-row>
@@ -35,6 +35,11 @@
       </v-col>
     </v-row>
   </div>
+  <div v-else>
+  <v-row justify="center">
+    Per poter prenotare verifica prima l'email, puoi chiedere nuovamente un account di verifica nella sezione account
+  </v-row>
+  </div>
 </template>
 
 <script>
@@ -50,7 +55,8 @@ export default {
           campi: [ { text: "Vecchio", colore: "primary", show: true, colorCard: "green", align: 'end' }, { text: "Nuovo", colore: "primary", show: true, colorCard: "#1F7087", align: 'start' }],
           campoSelezionato: null,
           riepilogoCampi: {},
-          mostraBtnPrenotazione: false
+          mostraBtnPrenotazione: false,
+          state
       }
     },
     components: {

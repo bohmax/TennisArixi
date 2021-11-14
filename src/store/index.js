@@ -9,7 +9,8 @@ export default new Vuex.Store({
     datiGiorni: {},
     mese: ["GEN", "FEB", "MAR", "APR", "MAG", "GIU", "LUG", "AGO", "SET", "OTT", "NOV", "DIC"],
     weekday: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
-    orari: ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00']
+    orari: ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'],
+    user: null
   },
   mutations: {
     addPrenotazione: function (state, obj) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
         selCampo[giorno] = obj.orari
         state.datiGiorni[giorno] = obj.giorno
       }
+    },
+    updateUser: function (state, user) {
+      state.user = user
     }
   },
   actions: {
@@ -43,6 +47,9 @@ export default new Vuex.Store({
     },
     datiGiorni: (state) => (giorno) => {
       return state.datiGiorni[giorno]
+    },
+    user: function (state) {
+      return state.user
     }
   }
 })

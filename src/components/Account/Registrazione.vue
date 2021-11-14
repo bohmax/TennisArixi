@@ -17,7 +17,7 @@
                                     </v-col>
                                     <v-col cols="12">
                                         <v-text-field v-model="loginPassword" :append-icon="show1?'eye':'eye-off'" :rules="[rules.required, rules.min]" 
-                                        :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 6 characters" counter @click:append="show1 = !show1"  @keydown.enter.prevent="validateLogin" ></v-text-field>
+                                        :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="Almeno 6 caratteri" counter @click:append="show1 = !show1"  @keydown.enter.prevent="validateLogin" ></v-text-field>
                                     </v-col>
                                     <v-col class="d-flex">
                                         <v-btn x-large block :disabled="!valid" color="success" @click="validateLogin"> Login </v-btn>
@@ -42,10 +42,11 @@
                                         <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
                                     </v-col>
                                     <v-col cols="12">
-                                        <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 6h characters" counter @click:append="show1 = !show1"></v-text-field>
+                                        <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="Almeno 6 caratteri" counter @click:append="show1 = !show1"></v-text-field>
                                     </v-col>
                                     <v-col cols="12">
-                                        <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Conferma Password" counter @click:append="show1 = !show1"></v-text-field>
+                                        <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]" 
+                                        :type="show1 ? 'text' : 'password'" name="input-10-1" label="Conferma Password" counter @click:append="show1 = !show1" @keydown.enter.prevent="validateReg"></v-text-field>
                                     </v-col>
                                     <v-col class="d-flex">
                                         <v-btn x-large block :disabled="!valid" color="success" @click="validateReg">Registrati</v-btn>
@@ -94,7 +95,7 @@ export default {
             ],
             rules: {
                 required: value => !!value || "Required.",
-                min: v => (v && v.length >= 4) || "Min 6 characters"
+                min: v => (v && v.length >= 6) || "Min 6 caratteri"
             },
             show1: false,
         }
@@ -107,7 +108,8 @@ export default {
     methods: {
         async validateLogin() {
             if (this.$refs.loginForm.validate()) {
-                firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword).then(user => {
+                firebase.auth().signInWithEmailAndPassword(this.loginEmail, this.loginPassword).
+                then(user => {
                     console.log(user)
                     this.$router.replace({name: 'Prenota'})
                     this.$refs.loginForm.reset()
@@ -120,6 +122,18 @@ export default {
             if (this.$refs.registerForm.validate()) {
                 firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(user => {
                     console.log(user)
+                    user.user.updateProfile({displayName: this.firstName + ' ' + this.lastName})
+                    .then(() => {
+                        // Profile updated successfully!
+                        console.log(user.displayName);
+                    }).catch(error => {
+                        console.log(error)
+                    })
+                    user.user.sendEmailVerification().then(() => {
+                    alert('Email di verifica inviata, controllare la posta per verificare l\'account e poter prenotare il campo')
+                }).catch(err => {
+                    console.log(err)
+                })
                     this.$router.replace({name: 'Prenota'})
                     this.$refs.registerForm.reset()
                 }).catch (err => {

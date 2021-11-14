@@ -1,13 +1,15 @@
 <template>
     <div id='app'>
         <v-app>
-            <v-row justify="center" class="mt-4">
+          <v-container>
+            <v-row justify="center" class="mt-2">
                 <log-status />
             </v-row>
             <v-row justify="center" align="center" class="shrink my-4">
                 <v-img alt='Vue logo' contain src="./assets/logo.png" width="128" height="128" aspect-ratio="1"/>
             </v-row>
             <Home />
+          </v-container>
         </v-app>
     </div>
 </template>

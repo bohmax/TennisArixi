@@ -1,11 +1,9 @@
 <template>
-    <v-container>
-        <transition>
-            <keep-alive>
-                <router-view></router-view>
-            </keep-alive>
-        </transition>
-    </v-container>
+    <transition>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+    </transition>
 </template>
 
 <script>

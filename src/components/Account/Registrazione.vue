@@ -16,7 +16,7 @@
                                         <v-text-field v-model="loginEmail" :rules="loginEmailRules" label="E-mail" required></v-text-field>
                                     </v-col>
                                     <v-col cols="12">
-                                        <v-text-field v-model="loginPassword" :append-icon="show1?'eye':'eye-off'" :rules="[rules.required, rules.min]" 
+                                        <v-text-field v-model="loginPassword" :append-icon="show1?'eye':'eye-off'" :rules="[rules.required, rules.min]"
                                         :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="Almeno 6 caratteri" counter @click:append="show1 = !show1"  @keydown.enter.prevent="validateLogin" ></v-text-field>
                                     </v-col>
                                     <v-col class="d-flex">
@@ -45,7 +45,7 @@
                                         <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="Almeno 6 caratteri" counter @click:append="show1 = !show1"></v-text-field>
                                     </v-col>
                                     <v-col cols="12">
-                                        <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]" 
+                                        <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]"
                                         :type="show1 ? 'text' : 'password'" name="input-10-1" label="Conferma Password" counter @click:append="show1 = !show1" @keydown.enter.prevent="validateReg"></v-text-field>
                                     </v-col>
                                     <v-col class="d-flex">
@@ -62,8 +62,9 @@
 </template>
 
 <script>
-import firebase from 'firebase/compat/app'
+import firebase, { utenti } from '../../firebase/index'
 import 'firebase/compat/auth'
+
 
 export default {
     name: 'Registrati',
@@ -77,7 +78,7 @@ export default {
                 {name:"Registrati", icon:"mdi-account-outline"}
             ],
             valid: true,
-            
+
             firstName: "",
             lastName: "",
             email: "",
@@ -129,11 +130,18 @@ export default {
                     }).catch(error => {
                         console.log(error)
                     })
+                    utenti.child(user.user.uid).set({
+                      nome: this.firstName,
+                      cognome: this.lastName,
+                      saldo: 0
+                    }).then(value => console.log(value))
+                    .catch(err => console.log(err))
                     user.user.sendEmailVerification().then(() => {
-                    alert('Email di verifica inviata, controllare la posta per verificare l\'account e poter prenotare il campo')
-                }).catch(err => {
-                    console.log(err)
-                })
+                      alert('Email di verifica inviata, controllare la posta per verificare ' +
+                          'l\'account e poter prenotare il campo')
+                    }).catch(err => {
+                        console.log(err)
+                    })
                     this.$router.replace({name: 'Prenota'})
                     this.$refs.registerForm.reset()
                 }).catch (err => {

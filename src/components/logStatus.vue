@@ -1,5 +1,5 @@
 <template>
-    <div id="status">
+    <v-col align="center">
         <v-row justify="center">
             {{ loggato }}
         </v-row>
@@ -9,7 +9,7 @@
         <v-row v-if="isLogged && !userVerificato" justify="center">
             <v-btn @click="codiceVerifica">Codice Verifica</v-btn>
         </v-row>
-    </div>
+    </v-col>
 </template>
 
 <script>
@@ -47,7 +47,7 @@ export default {
         verified: function () {
             const usr = store.getters.user
             if (usr) {
-                return usr.displayName + (usr.emailVerified ? 'Verificato' : 'Non verificato')
+                return usr.displayName + (usr.emailVerified ? ' Verificato' : ' Non verificato')
             }
             return ''
         }
